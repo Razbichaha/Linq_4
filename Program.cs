@@ -137,6 +137,5 @@ namespace Linq_4
             int maximumStrength = 1000;
             Strength = random.Next(maximumStrength);
         }
-
     }
 }
