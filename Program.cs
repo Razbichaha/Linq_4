@@ -84,9 +84,9 @@ namespace Linq_4
 
         private void GeneratePlaers()
         {
-            int quantityPatient = 15;
+            int quantityPlaers = 15;
 
-            for (int i = 0; i < quantityPatient; i++)
+            for (int i = 0; i < quantityPlaers; i++)
             {
                 Plaer plaer = new Plaer();
                 _plaers.Add(plaer);
