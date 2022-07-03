@@ -20,7 +20,7 @@ namespace Linq_4
 
         internal ProgramCore()
         {
-            GeneratePlaers();
+            GeneratePlayers();
         }
 
         internal void Start()
@@ -29,17 +29,17 @@ namespace Linq_4
             Console.Clear();
             Console.WriteLine("Для продолжения нажмите Enter");
 
-            GeneratePlaers();
-            ShowAllPlaer();
+            GeneratePlayers();
+            ShowAllPlayer();
 
             Console.WriteLine();
-            Console.WriteLine("Топ 3 по Уровню");
+            Console.WriteLine($"Топ {numberTopPlayers} по Уровню");
             Console.WriteLine();
 
             SortlevelBestPlayers(numberTopPlayers);
 
             Console.WriteLine();
-            Console.WriteLine("Топ 3 по Силе");
+            Console.WriteLine($"Топ {numberTopPlayers} по Силе");
             Console.WriteLine();
 
             SortStrengthBestPlayers(numberTopPlayers);
@@ -47,48 +47,48 @@ namespace Linq_4
 
         private void SortStrengthBestPlayers(int numberTopPlayers)
         {
-            var sorted = from Plaer in _players orderby Plaer.Strength descending select Plaer;
-            var TopPlayers = sorted.Take(numberTopPlayers);
+            var sorted = from player in _players orderby player.Strength descending select player;
+            var topPlayers = sorted.Take(numberTopPlayers);
 
-            ShowListPlayer(TopPlayers.ToList());
+            ShowListPlayer(topPlayers.ToList());
         }
 
         private void SortlevelBestPlayers(int numberTopPlayers)
         {
-            var sorted = from Player in _players orderby Player.Level descending select Player;
-            var TopPlayers = sorted.Take(numberTopPlayers);
+            var sorted = from player in _players orderby player.Level descending select player;
+            var topPlayers = sorted.Take(numberTopPlayers);
 
-            ShowListPlayer(TopPlayers.ToList());
+            ShowListPlayer(topPlayers.ToList());
         }
 
         private void ShowListPlayer(List<Player> players)
         {
             foreach (Player player in players)
             {
-                ShowPlaer(player);
+                ShowPlayer(player);
             }
         }
 
-        private void ShowAllPlaer()
+        private void ShowAllPlayer()
         {
             Console.Clear();
 
             foreach (Player player in _players)
             {
-                ShowPlaer(player);
+                ShowPlayer(player);
             }
         }
 
-        private void ShowPlaer(Player player)
+        private void ShowPlayer(Player player)
         {
             Console.WriteLine($" {player.Name} | Уровень - {player.Level} | Сила - {player.Strength}");
         }
 
-        private void GeneratePlaers()
+        private void GeneratePlayers()
         {
-            int quantityPlaers = 15;
+            int quantityPlayers = 15;
 
-            for (int i = 0; i < quantityPlaers; i++)
+            for (int i = 0; i < quantityPlayers; i++)
             {
                 Player player = new Player();
                 _players.Add(player);
