@@ -45,9 +45,8 @@ namespace Linq_4
 
         private void SortedTop3Strength()
         {
-            int skip = 3;
             var sorted = from Plaer in _plaers orderby Plaer.Strength descending select Plaer;
-            var top3 = sorted.SkipLast(sorted.Count() - skip);
+            var top3 = sorted.Take(3);
 
             foreach (Plaer plaer in top3)
             {
@@ -57,9 +56,8 @@ namespace Linq_4
 
         private void SortedTop3Level()
         {
-            int skip = 3;
             var sorted = from Plaer in _plaers orderby Plaer.Level descending select Plaer;
-            var top3 = sorted.SkipLast(sorted.Count() - skip);
+            var top3 = sorted.Take(3);
 
             foreach (Plaer plaer in top3)
             {
