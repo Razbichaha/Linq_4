@@ -16,7 +16,7 @@ namespace Linq_4
 
     class ProgramCore
     {
-        private List<Plaer> _plaers = new List<Plaer>();
+        private List<Player> _players = new List<Player>();
 
         internal ProgramCore()
         {
@@ -25,6 +25,7 @@ namespace Linq_4
 
         internal void Start()
         {
+            int numberTopPlayers = 3;
             Console.Clear();
             Console.WriteLine("Для продолжения нажмите Enter");
 
@@ -33,35 +34,38 @@ namespace Linq_4
 
             Console.WriteLine();
             Console.WriteLine("Топ 3 по Уровню");
+            Console.WriteLine();
 
-            SortedTop3Level();
+            SortlevelBestPlayers(numberTopPlayers);
 
             Console.WriteLine();
             Console.WriteLine("Топ 3 по Силе");
             Console.WriteLine();
 
-            SortedTop3Strength();
+            SortStrengthBestPlayers(numberTopPlayers);
         }
 
-        private void SortedTop3Strength()
+        private void SortStrengthBestPlayers(int numberTopPlayers)
         {
-            var sorted = from Plaer in _plaers orderby Plaer.Strength descending select Plaer;
-            var top3 = sorted.Take(3);
+            var sorted = from Plaer in _players orderby Plaer.Strength descending select Plaer;
+            var TopPlayers = sorted.Take(numberTopPlayers);
 
-            foreach (Plaer plaer in top3)
-            {
-                ShowPlaer(plaer);
-            }
+            ShowListPlayer(TopPlayers.ToList());
         }
 
-        private void SortedTop3Level()
+        private void SortlevelBestPlayers(int numberTopPlayers)
         {
-            var sorted = from Plaer in _plaers orderby Plaer.Level descending select Plaer;
-            var top3 = sorted.Take(3);
+            var sorted = from Player in _players orderby Player.Level descending select Player;
+            var TopPlayers = sorted.Take(numberTopPlayers);
 
-            foreach (Plaer plaer in top3)
+            ShowListPlayer(TopPlayers.ToList());
+        }
+
+        private void ShowListPlayer(List<Player> players)
+        {
+            foreach (Player player in players)
             {
-                ShowPlaer(plaer);
+                ShowPlaer(player);
             }
         }
 
@@ -69,15 +73,15 @@ namespace Linq_4
         {
             Console.Clear();
 
-            foreach (Plaer plaer in _plaers)
+            foreach (Player player in _players)
             {
-                ShowPlaer(plaer);
+                ShowPlaer(player);
             }
         }
 
-        private void ShowPlaer(Plaer plaer)
+        private void ShowPlaer(Player player)
         {
-            Console.WriteLine($" {plaer.Name} | Уровень - {plaer.Level} | Сила - {plaer.Strength}");
+            Console.WriteLine($" {player.Name} | Уровень - {player.Level} | Сила - {player.Strength}");
         }
 
         private void GeneratePlaers()
@@ -86,19 +90,19 @@ namespace Linq_4
 
             for (int i = 0; i < quantityPlaers; i++)
             {
-                Plaer plaer = new Plaer();
-                _plaers.Add(plaer);
+                Player player = new Player();
+                _players.Add(player);
             }
         }
     }
 
-    class Plaer
+    class Player
     {
         internal string Name { get; private set; }
         internal int Level { get; private set; }
         internal int Strength { get; private set; }
 
-        public Plaer()
+        public Player()
         {
             GenerateName();
             GenerateLevel();
